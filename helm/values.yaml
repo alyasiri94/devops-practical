@@ -1,0 +1,41 @@
+app_name: ''
+image:
+  tag: ''
+  pullPolicy: IfNotPresent
+semantic_version: '0.0.1'
+env: ""
+namespace: 'default'
+release:
+  version: ""
+replicaCount: 2
+strategyContext:
+  rollingUpdate:
+    maxUnavailable: 0
+    maxSurge: 2
+  type: RollingUpdate
+servicePort:
+  - port: 8080
+    name: http
+    targetPort: 3000
+readinessProbe:
+  httpGet:
+    path: /
+    port: 3000
+  initialDelaySeconds: 60
+  periodSeconds: 45
+  timeoutSeconds: 45
+service:
+  type: ClusterIP
+ingress:
+  enabled: false
+  annotations: {}
+resources:
+  limits:
+    cpu: "1000m"
+    memory: "4Gi"
+  requests:
+    cpu: "10m"
+    memory: "1Gi"
+nodeSelector: {}
+tolerations: []
+affinity: {}
